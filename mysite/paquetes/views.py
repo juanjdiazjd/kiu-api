@@ -88,10 +88,7 @@ def obtenerTotalPorFecha(request):
         if not 'fecha' in data:
             return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR,
                         data={"error_msg": "fecha no puede ser nulo"})
-        # fecha_start = data["fecha"] + " 00:00:00.000"
-        # fecha_end =data["fecha"] + " 23:59:99.999"
-        # start = datetime.datetime.strptime(fecha_start, '%Y-%m-%d %H:%M:%S.%f')
-        # end = datetime.datetime.strptime(fecha_end, '%Y-%m-%d %H:%M:%S.%f')
+
         db_response = json.loads(dumps(database["paquete"].find({"createdAt": data["fecha"]})))
         final_count = sumPrice(db_response)
         if not db_response:
